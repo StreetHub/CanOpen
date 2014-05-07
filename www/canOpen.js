@@ -5,7 +5,7 @@
 
     CanOpen.prototype.check = function (url, cb) {
         console.log('CanOpen Plugin: check:', url);
-        cordova.exec(cb, function(){ console.log('CanOpen: No url submitted');}, 'CanOpen', 'appCanOpen', url);
+        cordova.exec(cb, function(){ console.log('CanOpen: No url submitted');}, 'CanOpen', 'appCanOpen', [url]);
     };
     
     cordova.addConstructor(function() {
