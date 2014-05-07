@@ -3,7 +3,7 @@
     function CanOpen() {
     }
 
-    CanOpen.prototype.check = function (cb, err, opts) {
+    CanOpen.prototype.check = function (opts, cb, err) {
         console.log('CanOpen Plugin: check:', opts);
         cordova.exec(cb, err, 'CanOpen', 'appCanOpen', deserialise(opts));
     };
