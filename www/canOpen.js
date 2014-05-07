@@ -3,9 +3,9 @@
     function CanOpen() {
     }
 
-    CanOpen.prototype.check = function (opts, cb, err) {
-        console.log('CanOpen Plugin: check:', opts);
-        cordova.exec(cb, err, 'CanOpen', 'appCanOpen', deserialise(opts));
+    CanOpen.prototype.check = function (url, cb) {
+        console.log('CanOpen Plugin: check:', url);
+        cordova.exec(cb, function(){ console.log('CanOpen: No url submitted');}, 'CanOpen', 'appCanOpen', url);
     };
     
     cordova.addConstructor(function() {
