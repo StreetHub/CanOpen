@@ -1,19 +1,25 @@
-(function(window) {
-	var cordovaRef = window.Phonegap || window.Cordova || window.cordova;
+(function(cordova){
 
-	window.CanOpen = function(app, callback) {
-		cordovaRef.exec(
-			// Success callback
-			callback,
-			// Failure callback
-			function(err) { console.log('Missing app scheme.');},
-			// Native Class Name 
-			"CanOpen",
-			// Name of method in native class.
-			"appCanOpen",
-			// array of args to pass to method.
-			[app]
-		);
-	};
+    function CanOpen() {
+    }
 
-})(window);
+    CanOpen.prototype.check = function (cb, err, opts) {
+        console.log('CanOpen Plugin: check:', opts);
+        cordova.exec(cb, err, 'CanOpen', 'appCanOpen', deserialise(opts));
+    };
+    
+    cordova.addConstructor(function() {
+        if(!window.plugins) window.plugins = {};
+        window.plugins.canopen = new CanOpen();
+    });
+
+    // Deserialises the object to an array of strings
+    function deserialise(obj){
+        var arr = [];
+        for(key in obj){
+          arr.push(obj[key]);
+        }
+        return arr;
+    }
+
+})(window.cordova || window.Cordova);
